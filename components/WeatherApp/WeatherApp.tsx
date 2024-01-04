@@ -9,34 +9,22 @@ import {
   FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
+import useLocationPermission from "../../hook/useLocationPermission";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DailyWeather from "../DailyWeather/DailyWeather";
 import { getEventDataAction } from "../../store/actions/actionCreator";
 
 const WeatherApp = () => {
-  const [location, setLocation] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [selectedDays, setSelectedDays] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { location } = useLocationPermission();
 
   const { weatherData, loading } = useSelector((state) => state.weatherReducer);
   const dispatch = useDispatch();
 
   const styles = getStyles(isDarkMode);
-
-  useEffect(() => {
-    const getLocationPermission = async () => {
-      const { status } = await Permissions.askAsync(Permissions.LOCATION);
-      if (status === "granted") {
-        const location = await Location.getCurrentPositionAsync({});
-        setLocation(`${location.coords.latitude},${location.coords.longitude}`);
-      }
-    };
-
-    getLocationPermission();
-  }, []);
 
   useEffect(() => {
     if (location) {
