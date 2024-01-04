@@ -10,16 +10,17 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import useLocationPermission from "../../hook/useLocationPermission";
+import useDarkMode from "../../hook/useDarkMode";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DailyWeather from "../DailyWeather/DailyWeather";
 import { getEventDataAction } from "../../store/actions/actionCreator";
 
 const WeatherApp = () => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [selectedDays, setSelectedDays] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
 
   const { location } = useLocationPermission();
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
 
   const { weatherData, loading } = useSelector((state) => state.weatherReducer);
   const dispatch = useDispatch();
@@ -31,10 +32,6 @@ const WeatherApp = () => {
       dispatch(getEventDataAction({ q: location, days: selectedDays }));
     }
   }, [location, selectedDays]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
 
   const renderDayItem = ({ item }) => (
     <TouchableOpacity
