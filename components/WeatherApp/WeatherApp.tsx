@@ -5,14 +5,13 @@ import {
   StyleSheet,
   Switch,
   TouchableOpacity,
-  Modal,
-  FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import useLocationPermission from "../../hook/useLocationPermission";
 import useDarkMode from "../../hook/useDarkMode";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DailyWeather from "../DailyWeather/DailyWeather";
+import DaySelectionModal from "../DaySelectionModal/DaySelectionModal";
 import { getEventDataAction } from "../../store/actions/actionCreator";
 
 const WeatherApp = () => {
@@ -32,18 +31,6 @@ const WeatherApp = () => {
       dispatch(getEventDataAction({ q: location, days: selectedDays }));
     }
   }, [location, selectedDays]);
-
-  const renderDayItem = ({ item }) => (
-    <TouchableOpacity
-      style={styles.dayItem}
-      onPress={() => {
-        setSelectedDays(item);
-        setModalVisible(false);
-      }}
-    >
-      <Text style={styles.dayText}>{item} Day(s)</Text>
-    </TouchableOpacity>
-  );
 
   return (
     <View style={styles.container}>
@@ -92,20 +79,12 @@ const WeatherApp = () => {
         )}
       </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <FlatList
-            data={[1, 3, 7, 14]}
-            renderItem={renderDayItem}
-            keyExtractor={(item) => item.toString()}
-          />
-        </View>
-      </Modal>
+      <DaySelectionModal
+        modalVisible={modalVisible}
+        isDarkMode={isDarkMode}
+        setModalVisible={setModalVisible}
+        setSelectedDays={setSelectedDays}
+      />
     </View>
   );
 };
@@ -156,21 +135,6 @@ const getStyles = (isDarkMode: boolean) => {
     },
     weatherContainer: {
       alignItems: "center",
-    },
-    /*  */
-    dayItem: {
-      padding: 15,
-      borderBottomWidth: 1,
-      borderBottomColor: "#ccc",
-    },
-    dayText: {
-      fontSize: 18,
-      color: isDarkMode ? "#ddd" : "#333",
-    },
-    modalContainer: {
-      flex: 1,
-      justifyContent: "flex-end",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     selectButton: {
       padding: 10,
