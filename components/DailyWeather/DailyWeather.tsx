@@ -2,8 +2,19 @@ import React, { FC } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
 
 interface IDailyWeather {
-  forecastday: any;
+  forecastday: IForecastday[];
   isDarkMode: boolean;
+}
+
+interface IForecastday {
+  date: string;
+  day: {
+    avgtemp_c: string;
+    condition: {
+      icon: string;
+      text: string;
+    };
+  };
 }
 
 const DailyWeather: FC<IDailyWeather> = ({ forecastday, isDarkMode }) => {

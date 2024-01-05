@@ -2,9 +2,9 @@ import { call, put } from "redux-saga/effects";
 import axios from "axios";
 import ACTIONS from "../actions/actionTypes";
 
-export function* getWeatherWorker(action) {
+export function* getWeatherWorker(action: any) {
   try {
-    const data = yield call(getWeather, action.data);
+    const data: FetchedDataType<any> = yield call(getWeather, action.data);
 
     yield put({ type: ACTIONS.FETCH_WEATHER_SUCCESS, payload: data });
   } catch (error: any) {
@@ -12,7 +12,15 @@ export function* getWeatherWorker(action) {
   }
 }
 
-const getWeather = async ({ q, days }) => {
+import { AxiosResponse } from "axios";
+type FetchedDataType<T> = Promise<AxiosResponse<T>>;
+
+type GetWeather = {
+  q: string;
+  days: number;
+};
+
+const getWeather = async ({ q, days }: GetWeather): FetchedDataType<any> => {
   const { data } = await axios.get(
     `https://api.weatherapi.com/v1/${days === 1 ? "current" : "forecast"}.json`,
     {

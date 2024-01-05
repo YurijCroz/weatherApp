@@ -15,6 +15,10 @@ interface IDaySelectionModal {
   isDarkMode: boolean;
 }
 
+interface IDayItem {
+  item: number;
+}
+
 const DaySelectionModal: FC<IDaySelectionModal> = ({
   modalVisible,
   setModalVisible,
@@ -23,7 +27,7 @@ const DaySelectionModal: FC<IDaySelectionModal> = ({
 }) => {
   const styles = getStyles(isDarkMode);
 
-  const renderDayItem = ({ item }) => (
+  const renderDayItem = ({ item }: IDayItem) => (
     <TouchableOpacity
       style={styles.dayItem}
       onPress={() => {

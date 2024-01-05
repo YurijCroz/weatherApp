@@ -8,6 +8,7 @@ import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DailyWeather from "../DailyWeather/DailyWeather";
 import DaySelectionModal from "../DaySelectionModal/DaySelectionModal";
 import { getEventDataAction } from "../../store/actions/actionCreator";
+import { RootState } from "../../store/reducers";
 
 const WeatherApp = () => {
   const [selectedDays, setSelectedDays] = useState(1);
@@ -16,7 +17,9 @@ const WeatherApp = () => {
   const { location } = useLocationPermission();
   const { isDarkMode, toggleDarkMode } = useDarkMode();
 
-  const { weatherData, loading } = useSelector((state) => state.weatherReducer);
+  const { weatherData, loading } = useSelector(
+    (state: RootState) => state.weatherReducer
+  );
   const dispatch = useDispatch();
 
   const styles = getStyles(isDarkMode);

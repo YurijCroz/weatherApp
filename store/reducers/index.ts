@@ -5,4 +5,6 @@ const rootReducer = combineReducers({
   weatherReducer,
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
 export default rootReducer;

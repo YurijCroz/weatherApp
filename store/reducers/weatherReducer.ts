@@ -6,7 +6,7 @@ const initialState = {
   error: null,
 };
 
-const weatherReducer = (state = initialState, action) => {
+const weatherReducer = (state = initialState, action: any) => {
   switch (action.type) {
     case ACTIONS.FETCH_WEATHER_REQUEST:
       return {
