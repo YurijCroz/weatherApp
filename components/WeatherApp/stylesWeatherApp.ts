@@ -16,21 +16,6 @@ export const getStyles = (isDarkMode: boolean) => {
       fontSize: 24,
       color: isDarkMode ? "#ddd" : "#333",
     },
-    controlContainer: {
-      alignItems: "center",
-      paddingBottom: 30,
-    },
-    switchContainer: {
-      width: "100%",
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    themeText: {
-      fontSize: 18,
-      color: isDarkMode ? "#ddd" : "#333",
-      paddingRight: 10,
-    },
     locationContainer: {
       marginBottom: 10,
     },
@@ -46,17 +31,6 @@ export const getStyles = (isDarkMode: boolean) => {
     },
     weatherContainer: {
       alignItems: "center",
-    },
-    selectButton: {
-      padding: 10,
-      backgroundColor: "#2196F3",
-      borderRadius: 5,
-      marginVertical: 10,
-      alignItems: "center",
-    },
-    selectButtonText: {
-      color: "#FFFFFF",
-      fontSize: 18,
     },
   });
 };

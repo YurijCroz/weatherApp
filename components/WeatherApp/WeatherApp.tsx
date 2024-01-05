@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Switch, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { getStyles } from "./stylesWeatherApp";
 import useLocationPermission from "../../hook/useLocationPermission";
@@ -7,6 +7,7 @@ import useDarkMode from "../../hook/useDarkMode";
 import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DailyWeather from "../DailyWeather/DailyWeather";
 import DaySelectionModal from "../DaySelectionModal/DaySelectionModal";
+import WeatherControl from "../WeatherControl/WeatherControl";
 import { getEventDataAction } from "../../store/actions/actionCreator";
 import { RootState } from "../../store/reducers";
 
@@ -35,20 +36,12 @@ const WeatherApp = () => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Weather App</Text>
       </View>
-      <View style={styles.controlContainer}>
-        <View style={styles.switchContainer}>
-          <Text style={styles.themeText}>Theme:</Text>
-          <Switch value={isDarkMode} onValueChange={toggleDarkMode} />
-        </View>
-        <TouchableOpacity
-          style={styles.selectButton}
-          onPress={() => setModalVisible(true)}
-        >
-          <Text
-            style={styles.selectButtonText}
-          >{`${selectedDays} Day(s)`}</Text>
-        </TouchableOpacity>
-      </View>
+      <WeatherControl
+        isDarkMode={isDarkMode}
+        setModalVisible={setModalVisible}
+        toggleDarkMode={toggleDarkMode}
+        selectedDays={selectedDays}
+      />
       <View style={styles.weatherContainer}>
         {weatherData ? (
           <>
