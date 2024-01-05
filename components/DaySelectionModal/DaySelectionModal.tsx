@@ -10,8 +10,8 @@ import {
 
 interface IDaySelectionModal {
   modalVisible: boolean;
-  setModalVisible: any;
-  setSelectedDays: any;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedDays: React.Dispatch<React.SetStateAction<number>>;
   isDarkMode: boolean;
 }
 
