@@ -8,6 +8,7 @@ import CurrentWeather from "../CurrentWeather/CurrentWeather";
 import DailyWeather from "../DailyWeather/DailyWeather";
 import DaySelectionModal from "../DaySelectionModal/DaySelectionModal";
 import WeatherControl from "../WeatherControl/WeatherControl";
+import WeatherApiLogoLink from "../WeatherApiLink/WeatherApiLink";
 import { getEventDataAction } from "../../store/actions/actionCreator";
 import { RootState } from "../../store/reducers";
 
@@ -36,6 +37,7 @@ const WeatherApp = () => {
       <View style={styles.header}>
         <Text style={styles.headerText}>Weather App</Text>
       </View>
+      <WeatherApiLogoLink isDarkMode={isDarkMode} />
       <WeatherControl
         isDarkMode={isDarkMode}
         setModalVisible={setModalVisible}
