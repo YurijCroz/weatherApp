@@ -5,6 +5,7 @@ export const getStyles = (isDarkMode: boolean) => {
     container: {
       flex: 1,
       backgroundColor: isDarkMode ? "#222" : "#fff",
+      paddingBottom: 5,
     },
     header: {
       paddingTop: 30,
@@ -31,6 +32,8 @@ export const getStyles = (isDarkMode: boolean) => {
     },
     weatherContainer: {
       alignItems: "center",
+      flex: 1,
+      width: "100%",
     },
   });
 };

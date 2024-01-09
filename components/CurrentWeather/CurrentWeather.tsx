@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { Text, StyleSheet, Image } from "react-native";
+import reverseDate from "../../utils/reverseDate";
 
 interface ICurrentWeather {
   current: {
@@ -20,9 +21,11 @@ const CurrentWeather: FC<ICurrentWeather> = ({
 }) => {
   const styles = getStyles(isDarkMode);
 
+  const [date, time] = localtime.split(" ");
+
   return (
     <>
-      <Text style={styles.locationText}>{localtime}</Text>
+      <Text style={styles.dateText}>{`${reverseDate(date)} ${time}`}</Text>
       <Text style={styles.temperatureText}>
         {Math.round(+current.temp_c)}°C
       </Text>
@@ -37,7 +40,7 @@ const CurrentWeather: FC<ICurrentWeather> = ({
 
 const getStyles = (isDarkMode: boolean) => {
   return StyleSheet.create({
-    locationText: {
+    dateText: {
       fontSize: 18,
       color: isDarkMode ? "#ddd" : "#333",
     },
