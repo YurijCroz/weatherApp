@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text, Switch, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { SvgXml } from "react-native-svg";
+import svgCollection from "../../svg/svgCollection";
 
 interface IWeatherControl {
   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,10 +20,17 @@ const WeatherControl: React.FC<IWeatherControl> = ({
 
   return (
     <View style={styles.controlContainer}>
-      <View style={styles.switchContainer}>
-        <Text style={styles.themeText}>Theme:</Text>
-        <Switch value={isDarkMode} onValueChange={toggleDarkMode} />
-      </View>
+      <TouchableOpacity style={styles.switch} onPress={() => toggleDarkMode()}>
+        <SvgXml
+          xml={
+            isDarkMode
+              ? svgCollection.night("#ddd")
+              : svgCollection.sunny("#333")
+          }
+          width="42"
+          height="42"
+        />
+      </TouchableOpacity>
       <TouchableOpacity
         style={styles.selectButton}
         onPress={() => setModalVisible(true)}
@@ -38,11 +47,16 @@ const getStyles = (isDarkMode: boolean) => {
       alignItems: "center",
       paddingBottom: 30,
     },
-    switchContainer: {
-      width: "100%",
+    switch: {
+      width: 52,
+      height: 52,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      position: "absolute",
+      right: 15,
+      bottom: 75,
+      padding: 20,
     },
     themeText: {
       fontSize: 18,

@@ -6,6 +6,7 @@ export const getStyles = (isDarkMode: boolean) => {
       flex: 1,
       backgroundColor: isDarkMode ? "#222" : "#fff",
       paddingBottom: 5,
+      position: "relative",
     },
     header: {
       paddingTop: 30,
