@@ -22,12 +22,12 @@ type GetWeather = {
 
 const getWeather = async ({ q, days }: GetWeather): FetchedDataType<any> => {
   const { data } = await axios.get(
-    `https://api.weatherapi.com/v1/${days === 1 ? "current" : "forecast"}.json`,
+    `https://api.weatherapi.com/v1/forecast.json`,
     {
       params: {
         key: "6d1f9cb9e1d84964a87113237240401",
         q,
-        days: days !== 1 ? days : null,
+        days: days !== 1 ? days : days + 1,
       },
     }
   );

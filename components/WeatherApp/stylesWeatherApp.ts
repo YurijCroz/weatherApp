@@ -17,13 +17,6 @@ export const getStyles = (isDarkMode: boolean) => {
       fontSize: 24,
       color: isDarkMode ? "#ddd" : "#333",
     },
-    locationContainer: {
-      marginBottom: 10,
-    },
-    locationText: {
-      fontSize: 18,
-      color: isDarkMode ? "#ddd" : "#333",
-    },
     lightSelectedText: {
       color: "#333",
     },
