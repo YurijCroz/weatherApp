@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import * as Location from "expo-location";
-import * as Permissions from "expo-permissions";
 
 const useLocationPermission = () => {
   const [location, setLocation] = useState("");
 
   useEffect(() => {
     const getLocationPermission = async () => {
-      const { status } = await Permissions.askAsync(Permissions.LOCATION);
-      if (status === "granted") {
-        const location = await Location.getCurrentPositionAsync({});
-        setLocation(`${location.coords.latitude},${location.coords.longitude}`);
+      try {
+        const { status } = await Location.requestForegroundPermissionsAsync();
+        if (status === "granted") {
+          const currentLocation = await Location.getCurrentPositionAsync({});
+          setLocation(
+            `${currentLocation.coords.latitude},${currentLocation.coords.longitude}`
+          );
+        }
+      } catch (error) {
+        console.error("Error requesting location permission:", error);
       }
     };
 
